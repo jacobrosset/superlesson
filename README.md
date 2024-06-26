@@ -1,5 +1,7 @@
 # Conclusion
 
+[My deployment](https://hostelrate.netlify.app/)
+
 ## We did:
 
 ### Html
@@ -59,6 +61,13 @@
 - Ask for input field with function
 - ask for api call with jsonplaceholder
 - ask for chatgpt api call 
+
+### Git
+- `git add`
+- `git stattus`
+- `git commit -m`
+- `git push`
+- `git log`
 
 ## Things to consider
 
