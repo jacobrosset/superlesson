@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Call Example with JSONPlaceholder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            white-space: pre-wrap; /* Preserves formatting */
+        }
+    </style>
+</head>
+<body>
+    <h1>API Call Example with JSONPlaceholder</h1>
+    <label for="apiInput">Enter API Endpoint:</label>
+    <input type="text" id="apiInput" placeholder="https://jsonplaceholder.typicode.com/posts">
+    <button onclick="makeApiCall()">Fetch Data</button>
+    <div id="result"></div>
+
+    <script>
+        async function makeApiCall() {
+            // Get the API endpoint from the input field
+            const apiEndpoint = document.getElementById('apiInput').value;
+            
+            try {
+                // Make the API call using Fetch API
+                const response = await fetch(apiEndpoint);
+                
+                // Check if the response is ok (status code 200-299)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                
+                // Parse the JSON data from the response
+                const data = await response.json();
+                
+                // Display the data in the result div
+                document.getElementById('result').innerText = JSON.stringify(data[0].id);
+            } catch (error) {
+                // Display any errors in the result div
+                document.getElementById('result').innerText = 'Error: ' + error.message;
+            }
+        }
+
+        // Pre-fill the input field with the JSONPlaceholder posts endpoint
+        document.getElementById('apiInput').value = 'https://jsonplaceholder.typicode.com/posts';
+    </script>
+</body>
+</html>
