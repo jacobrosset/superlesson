@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hostel Rate Analysis</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+
+        * {
+            font-family: "Unbounded", sans-serif;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        h2 {
+            color: #00008B;
+        }
+
+        h3 {
+            color: blue;
+        }
+
+        p {
+            font-weight: 200;
+        }
+
+        .article {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        #id {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="article">
+        <h1>Why Hostels Are Important in In-Time Analysis</h1>
+        <p>Hostels play a crucial role in the travel and tourism industry, particularly in in-time analysis. As the
+            world becomes more connected and travel becomes more accessible, understanding the dynamics of hostel
+            accommodations can provide valuable insights for businesses, travelers, and policymakers alike.</p>
+
+        <h2>Affordable Accommodation</h2>
+        <p>One of the primary reasons hostels are significant in in-time analysis is their affordability. Hostels offer
+            budget-friendly lodging options for travelers, making it possible for more people to explore new
+            destinations. This affordability is a key factor in analyzing travel trends, as it can influence the volume
+            and demographics of tourists visiting an area.</p>
+
+        <h2>Cultural Exchange and Community</h2>
+        <p>Hostels are known for fostering a sense of community and cultural exchange among travelers. Unlike
+            traditional hotels, hostels often provide communal spaces where guests can interact, share experiences, and
+            learn from one another. This unique aspect of hostels is important in understanding the social dynamics of
+            travel and tourism.</p>
+
+        <h2>Impact on Local Economies</h2>
+        <p>Hostels contribute significantly to local economies. They attract budget travelers who tend to spend money on
+            local businesses such as restaurants, shops, and tours. Analyzing the economic impact of hostels can help
+            local governments and businesses strategize on how to better support and benefit from the influx of
+            tourists.</p>
+
+        <h2>Adaptability and Innovation</h2>
+        <p>Hostels are often at the forefront of innovation in the accommodation sector. They adapt quickly to changing
+            travel trends and incorporate new technologies to enhance the guest experience. By analyzing hostels'
+            adaptability and innovations, industry stakeholders can gain insights into future trends and developments in
+            travel and hospitality.</p>
+
+        <h2>Environmental Sustainability</h2>
+        <p>Many hostels are committed to environmental sustainability. They implement eco-friendly practices such as
+            reducing waste, conserving energy, and promoting sustainable tourism. In-time analysis of these practices
+            can provide valuable data on the effectiveness of sustainability initiatives and help promote more
+            responsible travel behaviors.</p>
+
+        <h3>Conclusion</h3>
+        <p>Hostels are more than just a place to stay; they are integral to the travel experience and the tourism
+            industry's ecosystem. By analyzing hostels' role in affordability, cultural exchange, local economic impact,
+            innovation, and sustainability, we can gain a deeper understanding of travel trends and their implications.
+            This knowledge is essential for making informed decisions and fostering a more inclusive and sustainable
+            travel industry.</p>
+
+        <label for="apiInput">Enter API Endpoint:</label>
+        <input type="text" id="apiInput" placeholder="https://jsonplaceholder.typicode.com/posts">
+        <button onclick="makeApiCall()">Fetch Data</button>
+        <div id="result"></div>
+
+        <h1>ChatGPT API Call Example</h1>
+        <label for="userInput">Enter your message:</label>
+        <input type="text" id="userInput" placeholder="Type your message here">
+        <button onclick="makeApiCallGpt()">Send</button>
+        <div id="resultgpt"></div>
+    </div>
+
+    <script>
+        async function makeApiCallGpt() {
+            // Get the user's input
+            const userInput = document.getElementById('userInput').value;
+            const apiKey = 'YOUR OPEN API KEY'; // Replace with your actual API key
+
+            // Prepare the API request
+            const apiUrl = 'https://api.openai.com/v1/chat/completions';
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            };
+            const body = JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: userInput }]
+            });
+
+            try {
+                // Make the API call using Fetch API
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: headers,
+                    body: body
+                });
+
+                // Check if the response is ok (status code 200-299)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+
+                // Parse the JSON data from the response
+                const data = await response.json();
+
+                // Display the response from ChatGPT in the result div
+                const chatGptResponse = data.choices[0].message.content;
+                document.getElementById('resultgpt').innerText = chatGptResponse;
+            } catch (error) {
+                // Display any errors in the result div
+                document.getElementById('resultgpt').innerText = 'Error: ' + error.message;
+            }
+        }
+
+        async function makeApiCall() {
+            // Get the API endpoint from the input field
+            const apiEndpoint = document.getElementById('apiInput').value;
+
+            try {
+                // Make the API call using Fetch API
+                const response = await fetch(apiEndpoint);
+
+                // Check if the response is ok (status code 200-299)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+
+                // Parse the JSON data from the response
+                const data = await response.json();
+
+                // Display the data in the result div
+                document.getElementById('result').innerText = JSON.stringify(data[0].title, null, 2);
+            } catch (error) {
+                // Display any errors in the result div
+                document.getElementById('result').innerText = 'Error: ' + error.message;
+            }
+        }
+
+        // Pre-fill the input field with the JSONPlaceholder posts endpoint
+        document.getElementById('apiInput').value = 'https://jsonplaceholder.typicode.com/posts';
+    </script>
+
+</body>
+
+</html>
