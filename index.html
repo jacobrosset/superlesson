@@ -1,170 +1,101 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Hostel Rate Analysis</title>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frank's Plumbing and Electrical</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
-
-        * {
-            font-family: "Unbounded", sans-serif;
+        body {
+            font-family: Arial, sans-serif;
         }
-
-        h1 {
-            color: blue;
+        header, nav, section, footer {
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 0px;
+            text-align: center;
+            font-size: 1.2em;
         }
-
-        h2 {
-            color: #00008B;
+        header {
+            text-align: center;
         }
-
-        h3 {
-            color: blue;
+        header h1 {
+            font-size: 1.4em;
         }
-
-        p {
-            font-weight: 200;
+        nav a {
+            margin: 0 30px; /* Adjust margin to increase space between nav links */
+            text-decoration: none;
+            color: #333;
+            font-size: 1.2em;
         }
-
-        .article {
-            max-width: 500px;
-            margin: auto;
+        section {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
         }
-
-        #id {
-            color: green;
+        #about {
+            border-top: 2px solid #333; /* Add a line above the About Us section */
+            padding-top: 20px; /* Add some padding to separate the line from the content */
+        }
+        .service, .testimonial {
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
-
 <body>
-
-    <div class="article">
-        <h1>Why Hostels Are Important in In-Time Analysis</h1>
-        <p>Hostels play a crucial role in the travel and tourism industry, particularly in in-time analysis. As the
-            world becomes more connected and travel becomes more accessible, understanding the dynamics of hostel
-            accommodations can provide valuable insights for businesses, travelers, and policymakers alike.</p>
-
-        <h2>Affordable Accommodation</h2>
-        <p>One of the primary reasons hostels are significant in in-time analysis is their affordability. Hostels offer
-            budget-friendly lodging options for travelers, making it possible for more people to explore new
-            destinations. This affordability is a key factor in analyzing travel trends, as it can influence the volume
-            and demographics of tourists visiting an area.</p>
-
-        <h2>Cultural Exchange and Community</h2>
-        <p>Hostels are known for fostering a sense of community and cultural exchange among travelers. Unlike
-            traditional hotels, hostels often provide communal spaces where guests can interact, share experiences, and
-            learn from one another. This unique aspect of hostels is important in understanding the social dynamics of
-            travel and tourism.</p>
-
-        <h2>Impact on Local Economies</h2>
-        <p>Hostels contribute significantly to local economies. They attract budget travelers who tend to spend money on
-            local businesses such as restaurants, shops, and tours. Analyzing the economic impact of hostels can help
-            local governments and businesses strategize on how to better support and benefit from the influx of
-            tourists.</p>
-
-        <h2>Adaptability and Innovation</h2>
-        <p>Hostels are often at the forefront of innovation in the accommodation sector. They adapt quickly to changing
-            travel trends and incorporate new technologies to enhance the guest experience. By analyzing hostels'
-            adaptability and innovations, industry stakeholders can gain insights into future trends and developments in
-            travel and hospitality.</p>
-
-        <h2>Environmental Sustainability</h2>
-        <p>Many hostels are committed to environmental sustainability. They implement eco-friendly practices such as
-            reducing waste, conserving energy, and promoting sustainable tourism. In-time analysis of these practices
-            can provide valuable data on the effectiveness of sustainability initiatives and help promote more
-            responsible travel behaviors.</p>
-
-        <h3>Conclusion</h3>
-        <p>Hostels are more than just a place to stay; they are integral to the travel experience and the tourism
-            industry's ecosystem. By analyzing hostels' role in affordability, cultural exchange, local economic impact,
-            innovation, and sustainability, we can gain a deeper understanding of travel trends and their implications.
-            This knowledge is essential for making informed decisions and fostering a more inclusive and sustainable
-            travel industry.</p>
-
-        <label for="apiInput">Enter API Endpoint:</label>
-        <input type="text" id="apiInput" placeholder="https://jsonplaceholder.typicode.com/posts">
-        <button onclick="makeApiCall()">Fetch Data</button>
-        <div id="result"></div>
-
-        <h1>ChatGPT API Call Example</h1>
-        <label for="userInput">Enter your message:</label>
-        <input type="text" id="userInput" placeholder="Type your message here">
-        <button onclick="makeApiCallGpt()">Send</button>
-        <div id="resultgpt"></div>
-    </div>
-
-    <script>
-        async function makeApiCallGpt() {
-            // Get the user's input
-            const userInput = document.getElementById('userInput').value;
-            const apiKey = 'YOUR OPEN API KEY'; // Replace with your actual API key
-
-            // Prepare the API request
-            const apiUrl = 'https://api.openai.com/v1/chat/completions';
-            const headers = {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            };
-            const body = JSON.stringify({
-                model: "gpt-3.5-turbo",
-                messages: [{ role: "user", content: userInput }]
-            });
-
-            try {
-                // Make the API call using Fetch API
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: headers,
-                    body: body
-                });
-
-                // Check if the response is ok (status code 200-299)
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-
-                // Parse the JSON data from the response
-                const data = await response.json();
-
-                // Display the response from ChatGPT in the result div
-                const chatGptResponse = data.choices[0].message.content;
-                document.getElementById('resultgpt').innerText = chatGptResponse;
-            } catch (error) {
-                // Display any errors in the result div
-                document.getElementById('resultgpt').innerText = 'Error: ' + error.message;
-            }
-        }
-
-        async function makeApiCall() {
-            // Get the API endpoint from the input field
-            const apiEndpoint = document.getElementById('apiInput').value;
-
-            try {
-                // Make the API call using Fetch API
-                const response = await fetch(apiEndpoint);
-
-                // Check if the response is ok (status code 200-299)
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-
-                // Parse the JSON data from the response
-                const data = await response.json();
-
-                // Display the data in the result div
-                document.getElementById('result').innerText = JSON.stringify(data[0].title, null, 2);
-            } catch (error) {
-                // Display any errors in the result div
-                document.getElementById('result').innerText = 'Error: ' + error.message;
-            }
-        }
-
-        // Pre-fill the input field with the JSONPlaceholder posts endpoint
-        document.getElementById('apiInput').value = 'https://jsonplaceholder.typicode.com/posts';
-    </script>
-
-</body>
-
-</html>
+    <header>
+        <h1>Frank's Plumbing and Electrical</h1>
+        <p>Your trusted experts in Guadalajara, Mexico</p>
+    </header>
+    <nav>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Welcome to Frank's Plumbing and Electrical, your on-time experts for plumbing and electrical needs in Guadalajara, Mexico. We offer services in both Spanish and English, ensuring clear communication for all clients.</p>
+        <img src="images/PHOTO-2024-07-01-09-34-04.jpg" alt="About Us">
+    </section>
+    <section id="services">
+        <h2>Services</h2>
+        <div class="service">
+            <h3>Plumbing</h3>
+            <p>Leak repairs, pipe installations, and water system maintenance.</p>
+            <img src="images/PHOTO-2024-07-01-09-33-45.jpg" alt="Plumbing">
+        </div>
+        <div class="service">
+            <h3>Electrical</h3>
+            <p>Installations, repairs, and system maintenance.</p>
+            <img src="images/PHOTO-2024-07-01-11-37-42.jpg" alt="Electrical">
+        </div>
+        <div class="service">
+            <h3>24/7 Emergency Services</h3>
+            <p>Immediate attention for any plumbing or electrical emergency.</p>
+            <img src="images/PHOTO-2024-07-01-11-43-26.jpg" alt="Emergency Services">
+        </div>
+        <div class="service">
+            <h3>Residential & Commercial Services</h3>
+            <p>Customized solutions for homes and businesses.</p>
+            <img src="images/PHOTO-2024-07-01-11-59-16 (2).jpg" alt="Residential and Commercial Services">
+        </div>
+    </section>
+    <section id="testimonials">
+        <h2>Testimonials</h2>
+        <div class="testimonial">
+            <p>"Frank's team is incredibly professional. They fixed my leak in no time!" - Maria G.</p>
+        </div>
+        <div class="testimonial">
+            <p>"I highly recommend Frank's Plumbing and Electrical. Their 24/7 service is a lifesaver!" - John D.</p>
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Phone: +52 (33) 3894 3247</p>
+        <p>Email: franksplumbing.electrical@gmail.com</p>
